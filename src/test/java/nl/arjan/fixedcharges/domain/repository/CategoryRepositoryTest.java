@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import static org.hamcrest.Matchers.*;
  * @since 07-02-18
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest
 @DataJpaTest
 public class CategoryRepositoryTest {
     @Autowired
@@ -43,7 +45,7 @@ public class CategoryRepositoryTest {
 
     @Test
     public void findByIdNotFound() {
-        Optional<Category> result = categoryRepository.findById(1L);
+        Optional<Category> result = categoryRepository.findById(999L);
 
         assertThat(result.isPresent(), is(false));
 
@@ -56,7 +58,7 @@ public class CategoryRepositoryTest {
 
         List<Category> result = categoryRepository.findAllByDescriptionContainsIgnoreCase(category.getDescription());
 
-        assertThat(result, contains(category));
+        assertThat(result, hasItem(category));
     }
 
     @Test
@@ -66,7 +68,7 @@ public class CategoryRepositoryTest {
 
         List<Category> result = categoryRepository.findAllByDescriptionContainsIgnoreCase(category.getDescription().substring(1,3));
 
-        assertThat(result, contains(category));
+        assertThat(result, hasItem(category));
     }
 
     @Test
@@ -76,7 +78,7 @@ public class CategoryRepositoryTest {
 
         List<Category> result = categoryRepository.findAllByDescriptionContainsIgnoreCase(category.getDescription().toUpperCase());
 
-        assertThat(result, contains(category));
+        assertThat(result, hasItem(category));
     }
 
     @Test

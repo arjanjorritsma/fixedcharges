@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import static org.hamcrest.Matchers.*;
  * @since 07-02-18
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest
 @DataJpaTest
 public class RegistrationRepositoryTest {
     @Autowired
