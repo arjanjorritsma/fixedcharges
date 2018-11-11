@@ -1,4 +1,4 @@
-package nl.arjan.fixedcharges.view;
+package nl.arjan.fixedcharges.view.category;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
@@ -26,18 +26,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CategoryEditor extends VerticalLayout implements KeyNotifier {
 
     private final transient CategoryRepository repository;
-    /* Fields to edit properties in Customer entity */
-    TextField description = new TextField("Description");
-    TextField dayOfDebit = new TextField("Day of debit");
+    /* Fields to edit properties in Category entity */
+    private TextField description = new TextField("Description");
+    private TextField dayOfDebit = new TextField("Day of debit");
     /* Action buttons */
-    Button saveButton = new Button("Save", VaadinIcon.CHECK.create());
-    Button cancelButton = new Button("Cancel");
-    Button deleteButton = new Button("Delete", VaadinIcon.TRASH.create());
-    HorizontalLayout actions = new HorizontalLayout(saveButton, cancelButton, deleteButton);
-    Binder<Category> binder = new Binder<>(Category.class);
-    /**
-     * The currently edited category
-     */
+    private Button saveButton;
+    private Button cancelButton;
+    private Button deleteButton;
+    private HorizontalLayout actions;
+    private Binder<Category> binder;
+    /* The currently edited category */
     private transient Category category;
     private transient ChangeHandler changeHandler;
 
@@ -45,7 +43,9 @@ public class CategoryEditor extends VerticalLayout implements KeyNotifier {
     public CategoryEditor(CategoryRepository repository) {
         this.repository = repository;
 
+        actions = new HorizontalLayout(saveButton, cancelButton, deleteButton);
         add(description, dayOfDebit, actions);
+        binder = new Binder<>(Category.class);
         binder.forField(dayOfDebit)
                 .withConverter(
                         new StringToIntegerConverter("Please enter a number"))
@@ -57,7 +57,9 @@ public class CategoryEditor extends VerticalLayout implements KeyNotifier {
         // Configure and style components
         setSpacing(true);
 
+        saveButton = new Button("Save", VaadinIcon.CHECK.create());
         saveButton.getElement().getThemeList().add("primary");
+        deleteButton = new Button("Delete", VaadinIcon.TRASH.create());
         deleteButton.getElement().getThemeList().add("error");
 
         addKeyPressListener(Key.ENTER, e -> save());
@@ -65,16 +67,17 @@ public class CategoryEditor extends VerticalLayout implements KeyNotifier {
         // wire action buttons to save, delete and reset
         saveButton.addClickListener(e -> save());
         deleteButton.addClickListener(e -> delete());
+        cancelButton = new Button("Cancel");
         cancelButton.addClickListener(e -> editCategory(category));
         setVisible(false);
     }
 
-    public void delete() {
+    private void delete() {
         repository.delete(category);
         changeHandler.onChange();
     }
 
-    public void save() {
+    private void save() {
         repository.save(category);
         changeHandler.onChange();
     }
