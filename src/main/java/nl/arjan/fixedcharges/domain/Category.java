@@ -39,8 +39,7 @@ public class Category {
 
     }
 
-    public Category(Long id, String description, Integer dayOfDebit) {
-        this.id = id;
+    public Category(String description, Integer dayOfDebit) {
         this.description = description;
         this.dayOfDebit = dayOfDebit;
     }

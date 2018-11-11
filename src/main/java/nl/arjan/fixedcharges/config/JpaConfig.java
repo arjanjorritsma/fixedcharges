@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
  * @author arjan
  * @since 04-02-18
  */
-@EntityScan({"nl.arjan.fixedcharges.domain", "org.springframework.data.jpa.convert.threeten"})
+@EntityScan({"nl.arjan.fixedcharges.domain", //
+        "org.springframework.data.jpa.convert.threeten" //
+})
 public class JpaConfig {
 }
