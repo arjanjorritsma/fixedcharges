@@ -1,0 +1,37 @@
+<div class="container-fluid mt-3">
+  <form class="form-inline">
+    <div class="form-group mr-2 mb-2">
+      <input type="password" class="form-control" id="inputPassword2" placeholder="Search">
+    </div>
+    <button type="submit" class="btn btn-outline-secondary mb-2 mr-2" title="Search for category">
+      <fa name="search"></fa>
+    </button>
+    <a class="btn btn-outline-secondary mb-2" routerLink="/categories/create" role="button" title="Add new category">
+      <fa name="plus"></fa>
+    </a>
+  </form>
+</div>
+<div class="container-fluid p-lg-3">
+  <div class="row">
+    <table class="table table-responsive table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Description</th>
+        <th scope="col">Day of debit</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let category of categories">
+        <th>{{category.id}}</th>
+        <td>{{category.description}}</td>
+        <td> {{category.dayOfDebit}}</td>
+        <td>
+          <fa name="edit" routerLink="/categories/update/{{category.id}}" title="Update this category"></fa>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
