@@ -1,13 +1,13 @@
 <div class="container-fluid mt-3">
   <form class="form-inline">
     <div class="form-group mr-2 mb-2">
-      <input type="password" class="form-control" id="inputPassword2" placeholder="Search">
+      <input type="text" [(ngModel)]="search" name="search" class="form-control" id="inputSearch" placeholder="Search">
     </div>
-    <button type="submit" class="btn btn-outline-secondary mb-2 mr-2" title="Search for category">
+    <button type="submit" (click)="searchCategory()" name="searchButton" class="btn btn-outline-secondary mb-2 mr-2" title="Search for category">
       <fa name="search"></fa>
     </button>
     <a class="btn btn-outline-secondary mb-2" routerLink="/categories/create" role="button" title="Add new category">
-      <fa name="plus"></fa>
+      <fa name="plus" class="mr-2"></fa>New
     </a>
   </form>
 </div>
@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let category of categories">
+      <tr *ngFor="let category of categories" routerLink="/categories/update/{{category.id}}">
         <th>{{category.id}}</th>
         <td>{{category.description}}</td>
         <td> {{category.dayOfDebit}}</td>

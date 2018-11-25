@@ -45,7 +45,7 @@ public class CategoryRepositoryTest {
 
     @Test
     public void findByIdNotFound() {
-        Optional<Category> result = categoryRepository.findById(999L);
+        Optional<Category> result = categoryRepository.findById(999);
 
         assertThat(result.isPresent(), is(false));
 

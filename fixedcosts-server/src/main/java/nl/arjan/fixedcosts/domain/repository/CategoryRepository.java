@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Repository to persist {@link Category}.
@@ -14,15 +13,7 @@ import java.util.Optional;
  * @since 31-01-18
  */
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-    /**
-     * Find the {@link Category} by id.
-     *
-     * @param id The id of the {@link Category}.
-     * @return An {@link Optional} with the found {@link Category}.
-     */
-    Optional<Category> findById(Long id);
-
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
     /**
      * Find all {@link Category} by a part of the discription.
      *

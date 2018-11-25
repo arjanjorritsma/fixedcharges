@@ -1,7 +1,6 @@
 package nl.arjan.fixedcosts.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -27,7 +26,7 @@ public class Category {
             name = "native",
             strategy = "native"
     )
-    private Long id;
+    private Integer id;
     @Column(nullable = false, length = 50)
     private String description;
     @Column(name = "DAY_OF_DEBIT", nullable = false)
@@ -36,10 +35,10 @@ public class Category {
     private List<String> keys = new ArrayList<>();
 
     public Category() {
-
     }
 
-    public Category(String description, Integer dayOfDebit) {
+    public Category(Integer id, String description, Integer dayOfDebit) {
+        this.id = id;
         this.description = description;
         this.dayOfDebit = dayOfDebit;
     }

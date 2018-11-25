@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from "../category";
 import {CategoryService} from "../category.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-category-editor',
@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 export class CategoryEditorComponent implements OnInit {
   category: Category;
 
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService) {
+  constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService) {
   }
 
   ngOnInit() {
@@ -30,9 +30,6 @@ export class CategoryEditorComponent implements OnInit {
 
   saveCategory(): void {
     this.categoryService.save(this.category);
-  }
-
-  noneSet() {
-    return !this.category.description || !this.category.dayOfDebit;
+    this.router.navigate([`/categories`], {relativeTo: this.route});
   }
 }

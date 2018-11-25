@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CategoryService} from "../category.service";
 import {Category} from "../category";
 
 @Component({
@@ -7,33 +8,22 @@ import {Category} from "../category";
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  selectedCategory: Category;
-  categories: Category[] = [{
-    "id": 1,
-    "description": "Wegenbelasting Up",
-    "dayOfDebit": 25
-  }, {
-    "id": 2,
-    "description": "Wegenbelasting Volvo",
-    "dayOfDebit": 25
-  }, {
-    "id": 3,
-    "description": "Sparen kinderen",
-    "dayOfDebit": 24
-  }, {
-    "id": 4,
-    "description": "Sparen spaarrekening",
-    "dayOfDebit": 24
-  }
-  ];
+  search: string;
+  categories: Category[];
 
-  constructor() {
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
+    this.getCategories();
   }
 
-  onSelect(category: Category) {
-    this.selectedCategory = category;
+  getCategories() {
+    this.categoryService.getAll()
+      .subscribe(categories => this.categories = categories);
+  }
+
+  searchCategory() {
+    this.categoryService.getAllByDescription(this.search).subscribe(categories => this.categories = categories);
   }
 }

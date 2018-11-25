@@ -11,7 +11,7 @@
              placeholder="Day of debit" name="dayOfDebit">
     </div>
     <input type="hidden" [(ngModel)]="category.id" id="inputId" name="id"/>
-    <button type="submit" [disabled]="noneSet()" (click)="saveCategory()" class="btn btn-outline-secondary">
+    <button type="submit" (click)="saveCategory()" class="btn btn-outline-secondary">
       <fa name="save" class="mr-2"></fa>
       Save
     </button>
